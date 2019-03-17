@@ -7,26 +7,30 @@
 } def
 
 
-/circle-fractal {  % x-coord y-coord radius
-    3 dict begin
+/circle-fractal {  % x-coord y-coord radius min-radius
+    4 dict begin
 
+    /min-radius exch def
     /radius exch def
     /y exch def
     /x exch def
 
     x y radius circle
 
-    /radius radius 2 div def
+    radius min-radius ge
+    {
+        /radius radius 2 div def
 
-    x radius add y radius circle
-    x y radius add radius circle
-    x radius sub y radius circle
-    x y radius sub radius circle
+        x radius add y radius min-radius circle-fractal
+        x y radius add radius min-radius circle-fractal
+        x radius sub y radius min-radius circle-fractal
+        x y radius sub radius min-radius circle-fractal
+    } if
 
     end
 } def
 
 
-100 100 50 circle-fractal
+300 300 100 10 circle-fractal
 
 showpage
