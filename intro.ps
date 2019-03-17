@@ -3,13 +3,13 @@
 % -----------------------------------------------------------------------------
 % http://www.tailrecursive.org/postscript/examples/box1.html
 
-/inch {72 mul} def      % Convert inches->points (1/72 inch)
+/inch {72 mul} def    % Convert inches->points (1/72 inch)
 
 newpath
-1 inch 1 inch moveto    % an inch in from the lower left
-2 inch 1 inch lineto    % bottom side
-2 inch 2 inch lineto    % right side
-1 inch 2 inch lineto    % top side
+1 inch 1 inch moveto  % an inch in from the lower left
+2 inch 1 inch lineto  % bottom side
+2 inch 2 inch lineto  % right side
+1 inch 2 inch lineto  % top side
 stroke
 
 showpage
@@ -18,18 +18,18 @@ showpage
 % -----------------------------------------------------------------------------
 % http://www.tailrecursive.org/postscript/examples/rotate.html
 
-0 10 360 {              % Go from 0 to 360 degrees in 10 degree steps
-  newpath
+0 10 360 {          % Go from 0 to 360 degrees in 10 degree steps
+    newpath
 
-  gsave                 % Keep rotations temporary
+    gsave           % Keep rotations temporary
     250 300 moveto
-    dup                 % Duplicate degrees
-    rotate              % Rotate by degrees
-    0 rlineto           % Add a line whose length is proportional to degrees
+    dup             % Duplicate degrees
+    rotate          % Rotate by degrees
+    0 rlineto       % Add a line whose length is proportional to degrees
     stroke
-  grestore              % Get back the unrotated state
+    grestore        % Get back the unrotated state
 
-} for                   % Iterate over angles
+} for               % Iterate over angles
 
 showpage
 
@@ -50,15 +50,15 @@ showpage
     closepath
 } def
 
-gsave                         % Preserve the old coordinates
-72 72 translate               % Set origin to (72, 72)
-0 72 144 {                    % Move y-coordinate by 72 each time.
-    /y exch def               % Save y-coordinate.
-    0 72 144 {                % Move x-coordinate by 72 each time.
+gsave                 % Preserve the old coordinates
+72 72 translate       % Set origin to (72, 72)
+0 72 144 {            % Move y-coordinate by 72 each time
+    /y exch def       % Save y-coordinate
+    0 72 144 {        % Move x-coordinate by 72 each time
         y box stroke
     } for
 } for
-grestore                      % Restore the old coordinates
+grestore              % Restore the old coordinates
 
 showpage
 
@@ -66,32 +66,27 @@ showpage
 % -----------------------------------------------------------------------------
 % http://www.tailrecursive.org/postscript/examples/shadewidth.html
 
-% Demonstrate shading and width in drawing lines and filling shapes
-
-% Define an operator box which builds a path for a one inch square box
-% Note that box does not draw or fill the box.
-
 /box {
-  newpath
-  moveto				% Current point is on stack
-  0 72 rlineto			% Left
-  72 0 rlineto			% Top
-  0 -72 rlineto			% Right
-  closepath				% Bottom
+    newpath
+    moveto                           % Current point is on stack
+    0 72 rlineto                     % Left
+    72 0 rlineto                     % Top
+    0 -72 rlineto                    % Right
+    closepath                        % Bottom
 } def
 
-0 setgray				% 100% black
-1 setlinewidth			% One point thick lines
-72 72 moveto 72 144 lineto stroke	% Draw a one inch line
+0 setgray                            % 100% black
+1 setlinewidth                       % One point thick lines
+72 72 moveto 72 144 lineto stroke    % Draw a one inch line
 
-gsave					% Save a copy of the current settings
-  0.5 setgray			% 50% black
-  10 setlinewidth		% 10 point wide lines
-  144 72 moveto 144 144 lineto stroke	% Draw a one inch wide line
-  216 72 box	                        % Build a square path...
-  0.35 setgray			%    make it a little darker...
-  fill	 				%    and fill it.
-grestore                % Go back to the original settings
+gsave                                % Save a copy of the current settings
+0.5 setgray                          % 50% black
+10 setlinewidth                      % 10 point wide lines
+144 72 moveto 144 144 lineto stroke  % Draw a one inch wide line
+216 72 box                           % Build a square path...
+0.35 setgray                         % make it a little darker...
+fill                                 % and fill it.
+grestore                             % Go back to the original settings
 
 0.5 setlinewidth
 300 72 box stroke
@@ -102,36 +97,32 @@ showpage
 % -----------------------------------------------------------------------------
 % http://www.tailrecursive.org/postscript/examples/shadewidth.html
 
-% Demonstrate shading and width in drawing lines and filling shapes
-
-% Define an operator box which builds a path for a one inch square box
-% Note that box does not draw or fill the box.
-
 /box {
-  newpath
-  moveto				% Current point is on stack
-  0 72 rlineto			% Left
-  72 0 rlineto			% Top
-  0 -72 rlineto			% Right
-  closepath				% Bottom
+    newpath
+    moveto                           % Current point is on stack
+    0 72 rlineto                     % Left
+    72 0 rlineto                     % Top
+    0 -72 rlineto                    % Right
+    closepath                        % Bottom
 } def
 
-0 setgray				% 100% black
-1 setlinewidth			% One point thick lines
-72 72 moveto 72 144 lineto stroke	% Draw a one inch line
+0 setgray                            % 100% black
+1 setlinewidth                       % One point thick lines
+72 72 moveto 72 144 lineto stroke    % Draw a one inch line
 
-gsave					% Save a copy of the current settings
-  0.5 setgray			% 50% black
-  10 setlinewidth		% 10 point wide lines
-  144 72 moveto 144 144 lineto stroke	% Draw a one inch wide line
-  216 72 box	                        % Build a square path...
-  0.35 setgray			%    make it a little darker...
-  fill	 				%    and fill it.
-grestore                % Go back to the original settings
+gsave                                % Save a copy of the current settings
+0.5 setgray                          % 50% black
+10 setlinewidth                      % 10 point wide lines
+144 72 moveto 144 144 lineto stroke  % Draw a one inch wide line
+216 72 box                           % Build a square path...
+0.35 setgray                         % make it a little darker...
+fill                                 % and fill it.
+grestore                             % Go back to the original settings
 
 0.5 setlinewidth
 
-0 10 360 { % Draw the second box at several different rotations.
+% Draw the second box at several different rotations.
+0 10 360 {
     newpath
 
     gsave
@@ -146,13 +137,13 @@ showpage
 % -----------------------------------------------------------------------------
 % http://www.tailrecursive.org/postscript/operators.html#arc
 
-/circle {  % x-coord y-coord radius
+/circle {  % x-coord y-coord radius -
     newpath
     0 360 arc stroke
 } def
 
 
-/circle-fractal {  % x-coord y-coord radius min-radius
+/circle-fractal {  % x-coord y-coord radius min-radius -
     4 dict begin
 
     /min-radius exch def
