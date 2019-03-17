@@ -2,17 +2,17 @@
 
 % http://www.tailrecursive.org/postscript/examples/rotate.html
 
-0 10 360 {		% Go from 0 to 360 degrees in 10 degree steps
+0 10 360 {              % Go from 0 to 360 degrees in 10 degree steps
   newpath
 
-  gsave			% Keep rotations temporary
+  gsave                 % Keep rotations temporary
     250 300 moveto
     dup                 % Duplicate degrees
-    rotate		% Rotate by degrees
+    rotate              % Rotate by degrees
     0 rlineto           % Add a line whose length is proportional to degrees
     stroke
-  grestore		% Get back the unrotated state
+  grestore              % Get back the unrotated state
 
-} for			% Iterate over angles
+} for                   % Iterate over angles
 
 showpage
