@@ -1,0 +1,183 @@
+%!
+
+% -----------------------------------------------------------------------------
+% http://www.tailrecursive.org/postscript/examples/box1.html
+
+/inch {72 mul} def      % Convert inches->points (1/72 inch)
+
+newpath
+1 inch 1 inch moveto    % an inch in from the lower left
+2 inch 1 inch lineto    % bottom side
+2 inch 2 inch lineto    % right side
+1 inch 2 inch lineto    % top side
+stroke
+
+showpage
+
+
+% -----------------------------------------------------------------------------
+% http://www.tailrecursive.org/postscript/examples/rotate.html
+
+0 10 360 {              % Go from 0 to 360 degrees in 10 degree steps
+  newpath
+
+  gsave                 % Keep rotations temporary
+    250 300 moveto
+    dup                 % Duplicate degrees
+    rotate              % Rotate by degrees
+    0 rlineto           % Add a line whose length is proportional to degrees
+    stroke
+  grestore              % Get back the unrotated state
+
+} for                   % Iterate over angles
+
+showpage
+
+
+% -----------------------------------------------------------------------------
+% http://www.tailrecursive.org/postscript/examples/translate.html
+
+% Draw a box at 72, 72 using translate
+
+% operator box: xcoord ycoord box -
+% Creates one inch box at xcoord, ycoord
+/box {
+    newpath
+    moveto
+    72 0 rlineto
+    0 72 rlineto
+    -72 0 rlineto
+    closepath
+} def
+
+gsave                         % Preserve the old coordinates
+72 72 translate               % Set origin to (72, 72)
+0 72 144 {                    % Move y-coordinate by 72 each time.
+    /y exch def               % Save y-coordinate.
+    0 72 144 {                % Move x-coordinate by 72 each time.
+        y box stroke
+    } for
+} for
+grestore                      % Restore the old coordinates
+
+showpage
+
+
+% -----------------------------------------------------------------------------
+% http://www.tailrecursive.org/postscript/examples/shadewidth.html
+
+% Demonstrate shading and width in drawing lines and filling shapes
+
+% Define an operator box which builds a path for a one inch square box
+% Note that box does not draw or fill the box.
+
+/box {
+  newpath
+  moveto				% Current point is on stack
+  0 72 rlineto			% Left
+  72 0 rlineto			% Top
+  0 -72 rlineto			% Right
+  closepath				% Bottom
+} def
+
+0 setgray				% 100% black
+1 setlinewidth			% One point thick lines
+72 72 moveto 72 144 lineto stroke	% Draw a one inch line
+
+gsave					% Save a copy of the current settings
+  0.5 setgray			% 50% black
+  10 setlinewidth		% 10 point wide lines
+  144 72 moveto 144 144 lineto stroke	% Draw a one inch wide line
+  216 72 box	                        % Build a square path...
+  0.35 setgray			%    make it a little darker...
+  fill	 				%    and fill it.
+grestore                % Go back to the original settings
+
+0.5 setlinewidth
+300 72 box stroke
+
+showpage
+
+
+% -----------------------------------------------------------------------------
+% http://www.tailrecursive.org/postscript/examples/shadewidth.html
+
+% Demonstrate shading and width in drawing lines and filling shapes
+
+% Define an operator box which builds a path for a one inch square box
+% Note that box does not draw or fill the box.
+
+/box {
+  newpath
+  moveto				% Current point is on stack
+  0 72 rlineto			% Left
+  72 0 rlineto			% Top
+  0 -72 rlineto			% Right
+  closepath				% Bottom
+} def
+
+0 setgray				% 100% black
+1 setlinewidth			% One point thick lines
+72 72 moveto 72 144 lineto stroke	% Draw a one inch line
+
+gsave					% Save a copy of the current settings
+  0.5 setgray			% 50% black
+  10 setlinewidth		% 10 point wide lines
+  144 72 moveto 144 144 lineto stroke	% Draw a one inch wide line
+  216 72 box	                        % Build a square path...
+  0.35 setgray			%    make it a little darker...
+  fill	 				%    and fill it.
+grestore                % Go back to the original settings
+
+0.5 setlinewidth
+
+0 10 360 { % Draw the second box at several different rotations.
+    newpath
+
+    gsave
+    rotate
+    300 72 box stroke
+    grestore
+} for
+
+showpage
+
+
+% -----------------------------------------------------------------------------
+% http://www.tailrecursive.org/postscript/operators.html#arc
+
+/circle {  % x-coord y-coord radius
+    newpath
+    0 360 arc stroke
+} def
+
+
+/circle-fractal {  % x-coord y-coord radius min-radius
+    4 dict begin
+
+    /min-radius exch def
+    /radius exch def
+    /y exch def
+    /x exch def
+
+    x y radius circle
+
+    radius min-radius ge
+    {
+        /radius radius 2 div def
+
+        x radius add y radius min-radius circle-fractal
+        x y radius add radius min-radius circle-fractal
+        x radius sub y radius min-radius circle-fractal
+        x y radius sub radius min-radius circle-fractal
+    } if
+
+    end
+} def
+
+
+200 650 100 100 circle-fractal
+200 400 100 50 circle-fractal
+200 150 100 12 circle-fractal
+
+showpage
