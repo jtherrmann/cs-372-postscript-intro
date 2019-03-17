@@ -17,7 +17,9 @@
 
 gsave                         % Preserve the old coordinates
 72 72 translate               % Set origin to (72, 72)
-0 0 box stroke                % Draw the box at the new origin
+0 72 144 {                    % Move x-coordinate by 72 each time.
+    0 box stroke
+} for
 grestore                      % Restore the old coordinates
 
 showpage
