@@ -52,16 +52,17 @@ showpage
 
 gsave                 % Preserve the old coordinates
 72 72 translate       % Set origin to (72, 72)
+
+1 dict begin
 0 72 144 {            % Move y-coordinate by 72 each time
-    1 dict begin
 
     /y exch def       % Save y-coordinate
     0 72 144 {        % Move x-coordinate by 72 each time
         y box stroke
     } for
-
-    end
 } for
+end
+
 grestore              % Restore the old coordinates
 
 showpage
