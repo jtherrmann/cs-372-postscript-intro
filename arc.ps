@@ -1,9 +1,16 @@
 % http://www.tailrecursive.org/postscript/operators.html#arc
 
+
+/circle {  % x-coord y-coord radius
+    newpath
+    0 360 arc stroke
+} def
+    
+
 newpath
-100 100 50 0 360 arc stroke
-125 100 25 0 360 arc stroke
-100 125 25 0 360 arc stroke
-75 100 25 0 360 arc stroke
-100 75 25 0 360 arc stroke
+100 100 50 circle
+125 100 25 circle
+100 125 25 circle
+75 100 25 circle
+100 75 25 circle
 showpage
