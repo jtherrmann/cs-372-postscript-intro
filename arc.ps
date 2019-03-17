@@ -8,6 +8,8 @@
 
 
 /circle-fractal {  % x-coord y-coord radius
+    3 dict begin
+
     /radius exch def
     /y exch def
     /x exch def
@@ -21,6 +23,7 @@
     x radius sub y radius circle
     x y radius sub radius circle
 
+    end
 } def
 
 
