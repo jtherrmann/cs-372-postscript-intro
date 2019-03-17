@@ -153,10 +153,10 @@ showpage
 
     x y radius circle
 
+    /radius radius 2 div def
+
     radius min-radius ge
     {
-        /radius radius 2 div def
-
         x radius add y radius min-radius circle-fractal
         x y radius add radius min-radius circle-fractal
         x radius sub y radius min-radius circle-fractal
@@ -167,8 +167,8 @@ showpage
 } def
 
 
-200 650 100 100 circle-fractal
-200 400 100 50 circle-fractal
-200 150 100 12 circle-fractal
+200 650 100 50 circle-fractal
+200 400 100 25 circle-fractal
+200 150 100 6 circle-fractal
 
 showpage
