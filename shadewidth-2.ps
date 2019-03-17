@@ -30,6 +30,14 @@ gsave					% Save a copy of the current settings
 grestore                % Go back to the original settings
 
 0.5 setlinewidth
-300 72 box stroke
+
+0 10 360 { % Draw the second box at several different rotations.
+    newpath
+
+    gsave
+    rotate
+    300 72 box stroke
+    grestore
+} for
 
 showpage
